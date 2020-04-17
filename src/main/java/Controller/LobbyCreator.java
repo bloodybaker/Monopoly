@@ -7,10 +7,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.PasswordField;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
@@ -18,6 +15,8 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.PrintWriter;
+import java.net.Socket;
 import java.net.URL;
 import java.security.spec.RSAOtherPrimeInfo;
 import java.sql.Connection;
@@ -25,6 +24,7 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ResourceBundle;
+import java.util.Scanner;
 
 public class LobbyCreator extends Config {
 
@@ -41,11 +41,12 @@ public class LobbyCreator extends Config {
         this.nickname = name;
     }
 
-    @FXML
-    private ResourceBundle resources;
+    private static final String SERVER_HOST = "localhost";
+    private static final int SERVER_PORT = 3443;
+    private Socket clientSocket;
+    private PrintWriter outMessage;
+    private Scanner inMessage;
 
-    @FXML
-    private URL location;
 
     @FXML
     private AnchorPane back;
@@ -66,10 +67,22 @@ public class LobbyCreator extends Config {
     private Label email;
 
     @FXML
+    private TextArea area;
+
+    @FXML
+    private TextField inputField;
+
+    @FXML
     void connectServer(ActionEvent event) {
 
     }
-
+    @FXML
+    void sendmsg(ActionEvent event) {
+        if(!inputField.getText().equals("")) {
+           send();
+            inputField.setText("");
+        }
+    }
     @FXML
     void updateData(ActionEvent event) {
 
@@ -82,6 +95,8 @@ public class LobbyCreator extends Config {
 
     @FXML
     void initialize() {
+        area.setPrefColumnCount(1);
+        area.setPrefRowCount(40);
         try {
             Class.forName("com.mysql.jdbc.Driver");
             System.out.println(getNickname());
@@ -101,5 +116,37 @@ public class LobbyCreator extends Config {
         }
         nick.setText(nickname);
         email.setText(emailU);
+
+        //connection
+        try {
+            // подключаемся к серверу
+            clientSocket = new Socket(SERVER_HOST, SERVER_PORT);
+            inMessage = new Scanner(clientSocket.getInputStream());
+            outMessage = new PrintWriter(clientSocket.getOutputStream());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        new Thread(new Runnable() {
+            public void run() {
+                try {
+                    // бесконечный цикл
+                    while (true) {
+                        // если есть входящее сообщение
+                        if (inMessage.hasNext()) {
+                            // считываем его
+                            String inMes = inMessage.nextLine();
+                            area.appendText( inMes+ "\n");
+                        }
+                    }
+                } catch (Exception e) {
+                }
+            }
+        }).start();
+
+    }
+    public void send(){
+        String messageStr = "["+ getNickname() +"]: " +inputField.getText() + "\n";
+        outMessage.println(messageStr);
+        outMessage.flush();
     }
 }
