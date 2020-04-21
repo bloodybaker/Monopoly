@@ -17,8 +17,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.PrintWriter;
 import java.net.Socket;
-import java.net.URL;
-import java.security.spec.RSAOtherPrimeInfo;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -28,7 +26,6 @@ import java.util.Scanner;
 
 public class LobbyCreator extends Config {
 
-    private DataHandler dataHandler;
     private String nickname;
     private String emailU;
     private String URL;
@@ -46,7 +43,6 @@ public class LobbyCreator extends Config {
     private Socket clientSocket;
     private PrintWriter outMessage;
     private Scanner inMessage;
-
 
     @FXML
     private AnchorPane back;
@@ -74,6 +70,18 @@ public class LobbyCreator extends Config {
 
     @FXML
     void connectServer(ActionEvent event) {
+        connect.getScene().getWindow().hide();
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(getClass().getResource("/game.fxml"));
+        try {
+            loader.load();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        Parent root = loader.getRoot();
+        Stage st = new Stage();
+        st.setScene(new Scene(root));
+        st.showAndWait();
 
     }
     @FXML
@@ -99,8 +107,7 @@ public class LobbyCreator extends Config {
         area.setPrefRowCount(40);
         try {
             Class.forName("com.mysql.jdbc.Driver");
-            System.out.println(getNickname());
-            Connection connection = DriverManager.getConnection(HOST, USER, PASS);
+            Connection connection = DriverManager.getConnection(HOST,USER,PASS);
             PreparedStatement preparedStatement = connection.prepareStatement("select * from " + TABLE_NAME + " where login = ?");
             preparedStatement.setString(1, getNickname());
             ResultSet rs = preparedStatement.executeQuery();
