@@ -1,16 +1,23 @@
 package Controller;
 
 import java.net.URL;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.util.*;
 
 import Configurate.Config;
+import com.google.gson.Gson;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
+import javafx.scene.control.ToggleButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 
 public class Game extends Config {
-    ArrayList <String> users = new ArrayList<String>();
+    Gson gson = new Gson();
     Map <String,Integer> balance = new LinkedHashMap<String, Integer>();
     String user;
     @FXML
@@ -35,6 +42,9 @@ public class Game extends Config {
     private Label userName4;
 
     @FXML
+    private ToggleButton toggle;
+
+    @FXML
     private Label balance1;
 
     @FXML
@@ -57,43 +67,67 @@ public class Game extends Config {
     }
 
     @FXML
-    void initialize() {
-        if(users.size() <= 4){
-            users.add(this.user);
-            balance.put(this.user,1000);
-            System.out.println("Участник добавлен в игру: " + this.user + " $" + balance.get(this.user));
-        }
-        try {
-            while (true) {
+    void ready(ActionEvent event) {
+
+        if(balance.size() >= 4){
+            toggle.setVisible(false);
+            updateUsers();
+        }else {
+            if (toggle.isSelected()) {
+                toggle.setText("ГОТОВ");
+                toggle.getStyleClass().add("green-button");
+                updateUsers();
+            } else {
+                toggle.setText("НЕ ГОТОВ");
+                toggle.getStyleClass().add("red-button");
                 updateUsers();
             }
-        }catch (Exception e){
-            e.printStackTrace();
         }
+    }
+
+    @FXML
+    void initialize() {
 
     }
     void updateUsers(){
         try {
-            if(users.size() == 1){
-                userName1.setText(users.get(0));
-                balance1.setText(balance.get(users.get(0)).toString());
-                if (users.size() == 2){
-                    userName2.setText(users.get(1));
-                    balance2.setText(balance.get(users.get(1)).toString());
-                    if(users.size() == 3){
-                        userName3.setText(users.get(2));
-                        balance3.setText(balance.get(users.get(2)).toString());
-                        if (users.size() == 4){
-                            userName4.setText(users.get(3));
-                            balance4.setText(balance.get(users.get(3)).toString());
-                        }
-                    }
+            Class.forName("com.mysql.jdbc.Driver");
+            Connection connection = DriverManager.getConnection(HOST, USER, PASS);
+            PreparedStatement selectionStatement = connection.prepareStatement("select * from " + "room" + "");
+            ResultSet list = selectionStatement.executeQuery();
+            System.out.println("Getting data from DB");
+            while (list.next()) {
+                int num = list.getInt("number");
+                String ni = list.getString("nickname");
+                int mo = list.getInt("money");
+                System.out.println(num + " " + ni + " " + mo);
+                if (balance.size() <= 4) {
+                    balance.put(ni,mo);
                 }
             }
-            System.out.println("UPDATED USER LIST:" + users);
-            Thread.sleep(15000);
+            startGame();
         }catch (Exception e){
             System.out.println(e);
         }
+    }
+    void tempUpdateData(){
+        try {
+            Class.forName("com.mysql.jdbc.Driver");
+            Connection connection = DriverManager.getConnection(HOST, USER, PASS);
+            PreparedStatement preparedStatement = connection.prepareStatement("select * from " + "room" + "");
+            ResultSet rs = preparedStatement.executeQuery();
+            System.out.println("Successful execute");
+            //rs.next();
+            while(rs.next()){
+                System.out.println(rs.getInt("number") + rs.getString("nickname") + rs.getInt("money"));
+            }
+            rs.close();
+        }catch (Exception e) {
+            System.out.println(e);
+        }
+    }
+    void startGame(){
+        String json = gson.toJson(balance);
+        System.out.println(json);
     }
 }

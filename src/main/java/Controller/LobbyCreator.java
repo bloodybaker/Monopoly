@@ -43,6 +43,7 @@ public class LobbyCreator extends Config {
     private Socket clientSocket;
     private PrintWriter outMessage;
     private Scanner inMessage;
+    private int number = 0;
 
     @FXML
     private AnchorPane back;
@@ -71,19 +72,59 @@ public class LobbyCreator extends Config {
     @FXML
     void connectServer(ActionEvent event) {
         connect.getScene().getWindow().hide();
-        FXMLLoader loader = new FXMLLoader();
-        loader.setLocation(getClass().getResource("/game.fxml"));
         try {
-            loader.load();
-        } catch (IOException e) {
-            e.printStackTrace();
+            //проверка количества людей в комнате
+            Class.forName("com.mysql.jdbc.Driver");
+            Connection connection = DriverManager.getConnection(HOST, USER, PASS);
+            PreparedStatement selectionStatement = connection.prepareStatement("select * from " + "room" + "");
+            ResultSet list = selectionStatement.executeQuery();
+            System.out.println("Successful execute");
+            //rs.next();
+            while(list.next()){
+                int num = list.getInt("number");
+                String ni = list.getString("nickname");
+                int mo = list.getInt("money");
+                System.out.println(num + " " + ni +  " " +  mo);
+                if(num == 4){
+                    System.out.println("Комната переполнена");
+                    break;
+                }else {
+                    number++;
+                    insert(number);
+                }
+            }
+
+
+            list.close();
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/game.fxml"));
+            Parent root = (Parent) loader.load();
+            Game game = loader.getController();
+            game.setUser(nick.getText());
+            game.initialize();
+            Stage stage = new Stage();
+            stage.setScene(new Scene(root));
+            stage.show();
+        }catch (Exception e){
+            System.out.println(e);
         }
-        Parent root = loader.getRoot();
-        Stage st = new Stage();
-        st.setScene(new Scene(root));
-        st.showAndWait();
 
     }
+    //добавление пользователя в комнату
+    void insert(int value){
+        try {
+            Class.forName("com.mysql.jdbc.Driver");
+            Connection connection = DriverManager.getConnection(HOST, USER, PASS);
+            PreparedStatement preparedStatement = connection.prepareStatement("insert into " + "room" + " (number, nickname, money) values (?,?,?)");
+            preparedStatement.setInt(1, value);
+            preparedStatement.setString(2, nick.getText());
+            preparedStatement.setInt(3, 1000);
+            preparedStatement.executeUpdate();
+            preparedStatement.close();
+        }catch (Exception e){
+            System.out.println(e);
+        }
+    }
+    // валидация сообщения и вызов метода отправки
     @FXML
     void sendmsg(ActionEvent event) {
         if(!inputField.getText().equals("")) {
@@ -106,6 +147,7 @@ public class LobbyCreator extends Config {
         area.setPrefColumnCount(1);
         area.setPrefRowCount(40);
         try {
+            //получение информаци о пользователе
             Class.forName("com.mysql.jdbc.Driver");
             Connection connection = DriverManager.getConnection(HOST,USER,PASS);
             PreparedStatement preparedStatement = connection.prepareStatement("select * from " + TABLE_NAME + " where login = ?");

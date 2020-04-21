@@ -108,7 +108,5 @@ public class Controller extends Config {
 
     @FXML
     void initialize() {
-
-
     }
 }

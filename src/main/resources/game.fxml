@@ -2,6 +2,7 @@
 
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.ToggleButton?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -20,7 +21,7 @@
    <children>
       <AnchorPane fx:id="back" prefHeight="720.0" prefWidth="1280.0" styleClass="linear-grad" stylesheets="@back.css">
          <children>
-            <ImageView fitHeight="720.0" fitWidth="721.0" layoutX="393.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="720.0" fitWidth="721.0" layoutX="384.0" layoutY="2.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@image-assets/pngkit_blank-collage-frames-png_2705560.png" />
                </image>
@@ -105,6 +106,11 @@
                   <Image url="@image-assets/dice.png" />
                </image>
             </ImageView>
+            <ToggleButton fx:id="toggle" layoutX="60.0" layoutY="403.0" mnemonicParsing="false" onAction="#ready" prefHeight="59.0" prefWidth="233.0" styleClass="button2" stylesheets="@back.css" text="НЕ ГОТОВ" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="22.0" />
+               </font>
+            </ToggleButton>
          </children>
       </AnchorPane>
    </children>

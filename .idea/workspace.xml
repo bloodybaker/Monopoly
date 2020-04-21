@@ -1,14 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="cdb932d9-7e58-4d94-93a9-e7b232ef17da" name="Default" comment="server and chat">
-      <change afterPath="$PROJECT_DIR$/src/main/java/Controller/Game.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/game.fxml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/image-assets/dice.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/image-assets/pngkit_blank-collage-frames-png_2705560.png" afterDir="false" />
+    <list default="true" id="cdb932d9-7e58-4d94-93a9-e7b232ef17da" name="Default" comment="game board">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Configurate/Config.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Configurate/Config.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Controller/Controller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controller/Controller.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Controller/Game.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controller/Game.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Controller/LobbyCreator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controller/LobbyCreator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/back.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/back.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/game.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/game.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/Controller/LobbyCreator.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Controller/LobbyCreator.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -101,6 +100,7 @@
     <property name="MemberChooser.showClasses" value="true" />
     <property name="MemberChooser.sorted" value="false" />
     <property name="OverrideImplement.combined" value="false" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="dynamic.classpath" value="false" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/src/main/resources" />
@@ -147,7 +147,7 @@
       <Host>localhost</Host>
       <Port>5050</Port>
     </configuration>
-    <configuration name="Main" type="Application" factoryName="Application">
+    <configuration name="Main" type="Application" factoryName="Application" singleton="false">
       <option name="MAIN_CLASS_NAME" value="Main" />
       <module name="Monopoly" />
       <extension name="coverage">
@@ -269,7 +269,14 @@
       <option name="project" value="LOCAL" />
       <updated>1587126529483</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="game board">
+      <created>1587498542726</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1587498542726</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
@@ -280,7 +287,8 @@
     <option name="INCLUDE_TEXT_INTO_SHELF" value="false" />
     <MESSAGE value="add Readme file" />
     <MESSAGE value="server and chat" />
-    <option name="LAST_COMMIT_MESSAGE" value="server and chat" />
+    <MESSAGE value="game board" />
+    <option name="LAST_COMMIT_MESSAGE" value="game board" />
   </component>
   <component name="WindowStateProjectService">
     <state x="686" y="188" key="#Main_(1)" timestamp="1587124586461">
@@ -295,10 +303,10 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="552" y="181" key="#Project_Structure/0.0.1920.1040/-1280.13.1280.984@0.0.1920.1040" timestamp="1587073200124" />
-    <state x="414" y="177" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1587124892612">
+    <state x="414" y="177" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1587503676552">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="414" y="177" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1920.1040/-1280.13.1280.984@0.0.1920.1040" timestamp="1587124892612" />
+    <state x="414" y="177" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1920.1040/-1280.13.1280.984@0.0.1920.1040" timestamp="1587503676552" />
     <state x="765" y="212" key="#com.intellij.ide.util.MemberChooser" timestamp="1587113952994">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -311,10 +319,10 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="687" y="211" key="#com.intellij.ide.util.frameworkSupport.AddFrameworkSupportDialog/0.0.1920.1040/-1280.13.1280.984@0.0.1920.1040" timestamp="1587072920343" />
-    <state x="599" y="118" key="CommitChangelistDialog2" timestamp="1587126528249">
+    <state x="599" y="118" key="CommitChangelistDialog2" timestamp="1587498538101">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="599" y="118" key="CommitChangelistDialog2/0.0.1920.1040/-1280.13.1280.984@0.0.1920.1040" timestamp="1587126528249" />
+    <state x="599" y="118" key="CommitChangelistDialog2/0.0.1920.1040/-1280.13.1280.984@0.0.1920.1040" timestamp="1587498538101" />
     <state x="739" y="277" key="FileChooserDialogImpl" timestamp="1587124574036">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -323,22 +331,22 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="838" y="418" width="261" height="204" key="Github.ShareDialog/0.0.1920.1040/-1280.13.1280.984@0.0.1920.1040" timestamp="1587114740778" />
-    <state width="1877" height="246" key="GridCell.Tab.0.bottom" timestamp="1587498449451">
+    <state width="1877" height="212" key="GridCell.Tab.0.bottom" timestamp="1587507292796">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="246" key="GridCell.Tab.0.bottom/0.0.1920.1040/-1280.13.1280.984@0.0.1920.1040" timestamp="1587498449451" />
-    <state width="1877" height="246" key="GridCell.Tab.0.center" timestamp="1587498449451">
+    <state width="1877" height="212" key="GridCell.Tab.0.bottom/0.0.1920.1040/-1280.13.1280.984@0.0.1920.1040" timestamp="1587507292796" />
+    <state width="1877" height="212" key="GridCell.Tab.0.center" timestamp="1587507292796">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="246" key="GridCell.Tab.0.center/0.0.1920.1040/-1280.13.1280.984@0.0.1920.1040" timestamp="1587498449451" />
-    <state width="1877" height="246" key="GridCell.Tab.0.left" timestamp="1587498449451">
+    <state width="1877" height="212" key="GridCell.Tab.0.center/0.0.1920.1040/-1280.13.1280.984@0.0.1920.1040" timestamp="1587507292796" />
+    <state width="1877" height="212" key="GridCell.Tab.0.left" timestamp="1587507292796">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="246" key="GridCell.Tab.0.left/0.0.1920.1040/-1280.13.1280.984@0.0.1920.1040" timestamp="1587498449451" />
-    <state width="1877" height="246" key="GridCell.Tab.0.right" timestamp="1587498449451">
+    <state width="1877" height="212" key="GridCell.Tab.0.left/0.0.1920.1040/-1280.13.1280.984@0.0.1920.1040" timestamp="1587507292796" />
+    <state width="1877" height="212" key="GridCell.Tab.0.right" timestamp="1587507292796">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="246" key="GridCell.Tab.0.right/0.0.1920.1040/-1280.13.1280.984@0.0.1920.1040" timestamp="1587498449451" />
+    <state width="1877" height="212" key="GridCell.Tab.0.right/0.0.1920.1040/-1280.13.1280.984@0.0.1920.1040" timestamp="1587507292796" />
     <state width="1877" height="348" key="GridCell.Tab.1.bottom" timestamp="1587082802476">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -359,10 +367,10 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="463" y="165" key="SettingsEditor/0.0.1920.1040/-1280.13.1280.984@0.0.1920.1040" timestamp="1587124885958" />
-    <state x="552" y="255" key="Vcs.Push.Dialog.v2" timestamp="1587126539442">
+    <state x="552" y="255" key="Vcs.Push.Dialog.v2" timestamp="1587498545934">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="552" y="255" key="Vcs.Push.Dialog.v2/0.0.1920.1040/-1280.13.1280.984@0.0.1920.1040" timestamp="1587126539442" />
+    <state x="552" y="255" key="Vcs.Push.Dialog.v2/0.0.1920.1040/-1280.13.1280.984@0.0.1920.1040" timestamp="1587498545934" />
     <state x="668" y="347" key="com.intellij.ide.util.TipDialog" timestamp="1587423097945">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
